@@ -14,6 +14,7 @@ import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
   animations: HomeAnimations,
   imports: [WeeklyGoalsComponent,
     NavbarComponent,
+    WeeklyGoalsComponent
   ]
 })
 export class HomeComponent implements OnInit {

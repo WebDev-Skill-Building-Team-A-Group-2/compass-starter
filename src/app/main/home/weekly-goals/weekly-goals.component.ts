@@ -4,6 +4,7 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-modal.component';
+import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-header.component';
 
 @Component({
   selector: 'app-weekly-goals',
@@ -12,7 +13,9 @@ import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-mod
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsAnimations,
   standalone: true,
-  imports: [ WeeklyGoalsModalComponent
+  imports: [
+    WeeklyGoalsHeaderComponent,
+    WeeklyGoalsModalComponent,
   ],
 })
 export class WeeklyGoalsComponent implements OnInit {

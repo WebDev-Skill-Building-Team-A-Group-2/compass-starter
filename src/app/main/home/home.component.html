@@ -1,7 +1,5 @@
 <app-navbar></app-navbar>
 <div class="home-container">
-  @if (currentUser()) {
-    {{ currentUser().name }}
-  }
+  <app-weekly-goals></app-weekly-goals>
 </div>
 <app-weekly-goals></app-weekly-goals>
