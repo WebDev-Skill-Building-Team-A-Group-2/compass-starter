@@ -3,6 +3,7 @@ import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-modal.component';
 import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-header.component';
 
 @Component({
@@ -14,6 +15,7 @@ import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-h
   standalone: true,
   imports: [
     WeeklyGoalsHeaderComponent,
+    WeeklyGoalsModalComponent,
   ],
 })
 export class WeeklyGoalsComponent implements OnInit {
