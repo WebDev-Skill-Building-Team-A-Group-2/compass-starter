@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+$primary: #2dbdb1;
+$secondary: #e1fbf9;
+
 html, body, app-root {
   height: 100%;
   box-sizing: border-box;
@@ -14,4 +17,23 @@ html, body, app-root {
 
 body {
   background-color: #F2FFFE;
+}
+
+mat-checkbox {
+  --mdc-checkbox-selected-focus-icon-color: #{$primary};
+  --mdc-checkbox-selected-hover-icon-color: #{$primary};
+  --mdc-checkbox-selected-icon-color: #{$primary};
+  --mdc-checkbox-selected-pressed-icon-color: #{$primary};
+  --mdc-checkbox-unselected-icon-color: #{$primary};
+  --mdc-checkbox-unselected-focus-icon-color: #{$primary};
+  --mdc-checkbox-unselected-hover-icon-color: #{$primary};
+
+  --mdc-checkbox-unselected-focus-state-layer-color: #{$secondary};
+  --mdc-checkbox-unselected-hover-state-layer-color: #{$secondary};
+  --mdc-checkbox-unselected-pressed-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-focus-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-hover-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-pressed-state-layer-color: #{$secondary};
+
+  --mat-checkbox-label-text-color: white;
 }

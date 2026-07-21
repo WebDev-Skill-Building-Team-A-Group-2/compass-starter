@@ -1,7 +1,60 @@
 :host {
   display: block;
   .quarterly-goals-item-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    
+    width: 30%;
+    box-sizing: border-box;
+    padding: 16px 20px;
+    background: white;
+    border-radius: 10px;
+    color: #4b5853;
+    font-family: "Oxygen", sans-serif;
+    /* gap: 16px; */
+  }
+  .goal-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+ 
+  .goal-text {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+ 
+  .goal-hashtag {
+    margin: 0;
+    font-size: 14px;
+    color: #2dbdb1;
+    line-height: 1.4;
+  }
+ 
+  .goal-progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 0;
+    font-size: 14px;
+    color: #6b7773;
+    flex-shrink: 0;
+  }
+  .goal-text.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  ::ng-deep .check {
+    display: flex;
+    flex-direction: column;
+    margin-top: -9px;
+    .mdc-checkbox__background {
+      border-radius: 4px;
+      border-width: 2px;
+    }
   }
 }
