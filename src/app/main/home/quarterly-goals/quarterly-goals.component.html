@@ -1,3 +1,5 @@
 <div class="quarterly-goals-container">
-  quarterly-goals works!
+  <app-quarterly-goals-item
+    [goal]="quarterlyGoals[0]"
+    (goalToggled)="onGoalToggled($event)"></app-quarterly-goals-item>
 </div>
