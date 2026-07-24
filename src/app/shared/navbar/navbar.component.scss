@@ -31,11 +31,23 @@
 
 // material target, can't be nested
 .logout {
+  font-family: 'Oxygen';
   display: flex;
   align-items: center;
+  gap: 8px;
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
   padding: 10px;
+
+  mat-icon {
+    color: #2DBDB1;
+    display: inline-flex;  
+    align-items: center;
+    justify-content: center;
+    margin: 0;             
+    vertical-align: middle;
+  }
+ 
 }
  
