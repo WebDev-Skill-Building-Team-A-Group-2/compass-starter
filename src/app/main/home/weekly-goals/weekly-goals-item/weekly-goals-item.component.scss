@@ -5,7 +5,7 @@ $secondary: #e1fbf9;
   display: block;
   
   .goal.completed {
-  text-decoration: line-through;
+    text-decoration: line-through;
   }
   
   .weekly-goals-item-container {
@@ -15,25 +15,7 @@ $secondary: #e1fbf9;
     padding: 16px 8px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     background-color: white;
-
-  .check-box {
-    --mdc-checkbox-selected-focus-icon-color: #{$primary};
-    --mdc-checkbox-selected-hover-icon-color: #{$primary};
-    --mdc-checkbox-selected-icon-color: #{$primary};
-    --mdc-checkbox-selected-pressed-icon-color: #{$primary};
-    --mdc-checkbox-unselected-icon-color: #{$primary};
-    --mdc-checkbox-unselected-focus-icon-color: #{$primary};
-    --mdc-checkbox-unselected-hover-icon-color: #{$primary};
-  
-    --mdc-checkbox-unselected-focus-state-layer-color: #{$secondary};
-    --mdc-checkbox-unselected-hover-state-layer-color: #{$secondary};
-    --mdc-checkbox-unselected-pressed-state-layer-color: #{$secondary};
-    --mdc-checkbox-selected-focus-state-layer-color: #{$secondary};
-    --mdc-checkbox-selected-hover-state-layer-color: #{$secondary};
-    --mdc-checkbox-selected-pressed-state-layer-color: #{$secondary};
-  
-    --mat-checkbox-label-text-color: white;
-  }
+    
     .item {
       display: flex;
       flex-direction: row;

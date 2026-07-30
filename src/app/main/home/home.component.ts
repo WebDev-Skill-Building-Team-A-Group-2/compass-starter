@@ -14,7 +14,7 @@ import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   animations: HomeAnimations,
-  imports: [
+  imports: [WeeklyGoalsComponent,
     NavbarComponent,
     WeeklyGoalsComponent,
     QuarterlyGoalsComponent

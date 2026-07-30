@@ -1,7 +1,41 @@
 :host {
-  display: block;
   .weekly-goals-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    width: 30%;
+    height: 110px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 25px 20px 12px 21px;
+    color: #4b5853;
+    font-family: "Oxygen", sans-serif;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    color: #4B5853;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 27.5px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .week-timeframe {
+    font-size: 22.5px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .edit-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .edit-icon {
+    width: 20px;
   }
 }

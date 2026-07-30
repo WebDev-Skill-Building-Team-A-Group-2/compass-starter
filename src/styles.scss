@@ -2,6 +2,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
 
+$primary: #2dbdb1;
+$secondary: #e1fbf9;
 
 html, body, app-root {
   height: 100%;
@@ -19,4 +21,21 @@ body {
   background-color: #F2FFFE;
 }
 
+mat-checkbox {
+  --mdc-checkbox-selected-focus-icon-color: #{$primary};
+  --mdc-checkbox-selected-hover-icon-color: #{$primary};
+  --mdc-checkbox-selected-icon-color: #{$primary};
+  --mdc-checkbox-selected-pressed-icon-color: #{$primary};
+  --mdc-checkbox-unselected-icon-color: #{$primary};
+  --mdc-checkbox-unselected-focus-icon-color: #{$primary};
+  --mdc-checkbox-unselected-hover-icon-color: #{$primary};
 
+  --mdc-checkbox-unselected-focus-state-layer-color: #{$secondary};
+  --mdc-checkbox-unselected-hover-state-layer-color: #{$secondary};
+  --mdc-checkbox-unselected-pressed-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-focus-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-hover-state-layer-color: #{$secondary};
+  --mdc-checkbox-selected-pressed-state-layer-color: #{$secondary};
+
+  --mat-checkbox-label-text-color: white;
+}

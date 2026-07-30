@@ -1,15 +1,14 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
 <div class="navbar-container">
-  <!--<img class="logo" src="images/logo.svg">-->
+  <img class="logo" src="images/logo.svg">
   @if (currentUser()) {
     <div class="user-setting-section">
-      <img class="profile-pic" [src]= 'currentUser().photoURL' [matMenuTriggerFor]="menu" #menuTrigger/>
-      <mat-menu #menu="matMenu">
         <div class="logout" (click)="logout()">
-          <span>
-            Logout
-          </span>
+          <div class = "logout">Logout </div>
+         <mat-icon>logout</mat-icon>
         </div>
-      </mat-menu>
     </div>  
   }
 </div>
