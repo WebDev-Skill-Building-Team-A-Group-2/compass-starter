@@ -1,17 +1,13 @@
-$greeting-text: #2dbdb1;
-$greeting-bg: #e2f7f2;
-
-:host {
-  display: block;
-
+.greeting-container {
+  display: flex;
+  background: #E1FBF9;
+  border-radius: 10px;
+  height: 100%;
+  padding: 40px;  
+  width: 100vw;
+ 
   .greeting {
-    padding: 24px 35px;
-    background-color: $greeting-bg;
-    font-family: 'Oxygen', sans-serif;
+    color: #2DBDB1;
     font-size: 40px;
-    font-weight: 400;
-    line-height: 1;
-    color: $greeting-text;
-
   }
 }
