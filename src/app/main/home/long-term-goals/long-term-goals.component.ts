@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { LongTermGoalsAnimations } from './long-term-goals.animations';
+import { LongTermGoalsItemComponent } from './long-term-goals-item/long-term-goals-item.component';import { LongTermGoalData } from '../home.model';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { LongTermGoal } from '../../../core/store/long-term-goal/long-term-goal.model';
 
 @Component({
   selector: 'app-long-term-goals',
@@ -11,13 +13,21 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: LongTermGoalsAnimations,
   standalone: true,
-  imports: [
-  ],
+  imports: [LongTermGoalsItemComponent],
 })
 export class LongTermGoalsComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+  longTermGoals: LongTermGoal[] = [
+    {
+      __id: 'example-id',
+      __userId: 'example-user-id',
+      oneYear: 'Secure SWE or UX Engineering Internship',
+      fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work'
+    }
+    ];
   // --------------- INPUTS AND OUTPUTS ------------------
-
+  goal = this.longTermGoals[0];
+  
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
