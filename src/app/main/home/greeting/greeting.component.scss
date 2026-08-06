@@ -1,7 +1,17 @@
+$greeting-text: #2dbdb1;
+$greeting-bg: #e2f7f2;
+
 :host {
   display: block;
-  .greeting-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+
+  .greeting {
+    padding: 24px 35px;
+    background-color: $greeting-bg;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1;
+    color: $greeting-text;
+
   }
 }
