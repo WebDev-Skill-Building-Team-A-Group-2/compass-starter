@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { GreetingAnimations } from './greeting.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -19,7 +19,7 @@ import { interval, map } from 'rxjs';
   imports: [
   ],
 })
-export class GreetingComponent implements OnInit {
+export class GreetingComponent{
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
@@ -28,17 +28,22 @@ export class GreetingComponent implements OnInit {
 
   // --------------- LOCAL UI STATE ----------------------
 
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
-
   // --------------- COMPUTED DATA -----------------------
+  
+  //update date every 1000 ms
+  
   time: Signal<Date> = toSignal(
     interval(1000).pipe(
       map(() => new Date())
     ),
     { initialValue: new Date() }
   );
-
+  
+/*change date to hours -> if hours is between 5 and 12 say good morning,
+  if hours between 12 and 18 say good afternoon
+  if hours between 18 and 5 say good evening
+  */
+  
   greeting: Signal<string> = computed(() => {
     const currentHour = this.time().getHours();
   
@@ -66,7 +71,5 @@ export class GreetingComponent implements OnInit {
 
   // --------------- LOAD AND CLEANUP --------------------
   
-  ngOnInit(): void {
-    
-  }
+
 }
