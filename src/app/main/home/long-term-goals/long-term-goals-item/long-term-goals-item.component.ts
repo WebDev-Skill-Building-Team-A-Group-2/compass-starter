@@ -16,18 +16,6 @@ import { LongTermGoal } from '../../../../core/store/long-term-goal/long-term-go
 export class LongTermGoalsItemComponent implements OnInit {
   goal = input<LongTermGoal>();
 
-  // --------------- INPUTS AND OUTPUTS ------------------
-
-  /** The current signed in user. */
-
-  // --------------- LOCAL UI STATE ----------------------
-
-  /** Loading icon. */
-
-  // --------------- COMPUTED DATA -----------------------
-
-  // --------------- EVENT HANDLING ----------------------
-
   // --------------- OTHER -------------------------------
 
   constructor(
