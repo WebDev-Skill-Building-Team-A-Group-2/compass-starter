@@ -6,9 +6,6 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { toSignal } from '@angular/core/rxjs-interop';
 import { interval, map } from 'rxjs';
 
-
-
-
 @Component({
   selector: 'app-greeting',
   templateUrl: './greeting.component.html',
@@ -23,7 +20,7 @@ export class GreetingComponent{
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
+  /* The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
@@ -39,9 +36,10 @@ export class GreetingComponent{
     { initialValue: new Date() }
   );
   
-/*change date to hours -> if hours is between 5 and 12 say good morning,
-  if hours between 12 and 18 say good afternoon
-  if hours between 18 and 5 say good evening
+/**
+  *change date to hours -> if hours is between 5 and 12 say good morning,
+  *if hours between 12 and 18 say good afternoon
+  *if hours between 18 and 5 say good evening
   */
   
   greeting: Signal<string> = computed(() => {
