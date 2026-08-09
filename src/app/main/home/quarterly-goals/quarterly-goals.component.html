@@ -2,4 +2,8 @@
   <app-quarterly-goals-header
     (editQuarterlyGoals)="editQuarterlyGoals($event)">
   </app-quarterly-goals-header>
+  <app-quarterly-goals-item
+    [goal]="quarterlyGoals[0]"
+    (goalToggled)="onGoalToggled($event)">
+  </app-quarterly-goals-item>
 </div>
