@@ -19,7 +19,7 @@ import { GreetingComponent } from './greeting/greeting.component';
   imports: [
     NavbarComponent,
     WeeklyGoalsComponent,
-    LongTermGoalsComponent
+    LongTermGoalsComponent,
     QuarterlyGoalsComponent,
     GreetingComponent
   ]
