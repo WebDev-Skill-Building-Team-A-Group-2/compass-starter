@@ -6,6 +6,9 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.component'; 
+import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
+import { GreetingComponent } from './greeting/greeting.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +20,8 @@ import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.compon
     NavbarComponent,
     WeeklyGoalsComponent,
     LongTermGoalsComponent
+    QuarterlyGoalsComponent,
+    GreetingComponent
   ]
 })
 export class HomeComponent implements OnInit {

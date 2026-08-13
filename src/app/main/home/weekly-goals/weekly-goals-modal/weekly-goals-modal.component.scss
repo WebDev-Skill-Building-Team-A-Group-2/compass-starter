@@ -1,7 +1,144 @@
 :host {
   display: block;
-  .weekly-goals-modal-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative; 
+  width: 100%;
+  max-width: 800px;
+  min-height: 630px;
+  margin: 24px auto;
+  padding: 40px; 
+  background: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+// Header
+.wg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+
+  h2 {
+    margin: 0;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: #4B5853;
+  }
+
+  .wg-week {
+    margin: 8px 0 0;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 1;
+    color: #444444;
+  }
+
+  .wg-close-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #555555;
+    padding: 0;
+  }
+}
+
+// Rows
+.wg-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.wg-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 0;
+
+  &.cdk-drag-preview {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+  }
+
+  mat-form-field {
+    width: 100%;
+
+    input, mat-select {
+      font-family: 'Oxygen', sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      line-height: 1;
+    }
+  }
+}
+
+.wg-handle {
+  cursor: grab;
+  color: #2dbdb1;
+  flex: 0 0 auto;
+  font-size: 24px;
+}
+
+.wg-goal {
+  flex: 1 1 auto;
+}
+
+.wg-tag {
+  flex: 0 0 260px;
+}
+
+// Add Button
+.wg-add-btn {
+  align-self: flex-start;
+  margin-bottom: 32px;
+}
+
+// Footer
+.wg-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+
+  .wg-edit-summary {
+    font-family: 'Oxygen', sans-serif;
+    color: #777777;
+  }
+
+  button.mat-mdc-raised-button {
+    cursor: pointer;
+    background-color: #2dbdb1; 
+    color: #ffffff;
+    border: none;
+    width: 138px;
+    height: 42px;
+    border-radius: 12px;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:disabled {
+      background-color: #cccccc;
+      color: #888888;
+      cursor: not-allowed;
+    }
   }
 }

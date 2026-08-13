@@ -1,3 +1,37 @@
-<div class="weekly-goals-modal-container">
-  weekly-goals-modal works!
+<div class="card" [formGroup]="form">
+  <div class="wg-header">
+    <div>
+      <h2>Weekly Goals</h2>
+      <p class="wg-week">{{week}}</p>
+    </div>
+    <button mat-icon-button class="wg-close-btn" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)" formArrayName="goals">
+    <div class="wg-row" *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i" cdkDrag>
+      <mat-icon class="wg-handle" cdkDragHandle>drag_indicator</mat-icon>
+      <mat-form-field appearance="fill" class="wg-goal">
+        <input matInput placeholder="Enter your goal..." formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="wg-tag">
+        <mat-select formControlName="hashtagId" placeholder="quarterly goal...">
+          <mat-option *ngFor="let h of hashtags" [value]="h.id">#{{ h.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button class="wg-delete-btn" (click)="remove(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <button mat-button class="wg-add-btn" (click)="add()">
+    <mat-icon>add</mat-icon> Add a weekly goal
+  </button>
+
+  <div class="wg-footer">
+    <span class="wg-edit-summary">{{ summary() }}</span>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
+  </div>
 </div>

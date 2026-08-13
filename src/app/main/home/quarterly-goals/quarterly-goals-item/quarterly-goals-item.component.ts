@@ -3,6 +3,9 @@ import { QuarterlyGoalsItemAnimations } from './quarterly-goals-item.animations'
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuarterlyGoalData } from '../../home.model';
 
 @Component({
   selector: 'app-quarterly-goals-item',
@@ -12,14 +15,18 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   animations: QuarterlyGoalsItemAnimations,
   standalone: true,
   imports: [
+    MatCheckboxModule,
   ],
 })
 export class QuarterlyGoalsItemComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+  private _snackBar = inject(MatSnackBar);
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
+  goal = input<QuarterlyGoalData>();
+  goalToggled = output<QuarterlyGoalData>();
 
   // --------------- LOCAL UI STATE ----------------------
 
@@ -29,6 +36,16 @@ export class QuarterlyGoalsItemComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
+
+  checkGoal() {
+    const currentGoal = this.goal();
+    this.goalToggled.emit(currentGoal);
+  }
+
+  get incompleteWeeklyGoals(): number {
+    const currentGoal = this.goal();
+    return currentGoal.weeklyGoalsTotal - currentGoal.weeklyGoalsComplete;
+  }
 
   // --------------- OTHER -------------------------------
 
