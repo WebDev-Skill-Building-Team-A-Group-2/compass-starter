@@ -6,6 +6,7 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
+import { DateTimeComponent } from './date-time/date-time.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.compo
   animations: HomeAnimations,
   imports: [WeeklyGoalsComponent,
     NavbarComponent,
+    DateTimeComponent,
     WeeklyGoalsComponent,
     QuarterlyGoalsComponent
   ]
