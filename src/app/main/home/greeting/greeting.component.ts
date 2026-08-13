@@ -1,8 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { GreetingAnimations } from './greeting.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-greeting',
@@ -14,19 +16,47 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   imports: [
   ],
 })
-export class GreetingComponent implements OnInit {
+export class GreetingComponent{
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
+  /* The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
 
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
-
   // --------------- COMPUTED DATA -----------------------
+  
+  //update date every 1000 ms
+  
+  time: Signal<Date> = toSignal(
+    interval(1000).pipe(
+      map(() => new Date())
+    ),
+    { initialValue: new Date() }
+  );
+  
+/**
+  *change date to hours -> if hours is between 5 and 12 say good morning,
+  *if hours between 12 and 18 say good afternoon
+  *if hours between 18 and 5 say good evening
+  */
+  
+  greeting: Signal<string> = computed(() => {
+    const currentHour = this.time().getHours();
+  
+    let greetingMessage: string;
+  
+    if (currentHour >= 5 && currentHour < 12) {
+      greetingMessage = 'Good morning';
+    } else if (currentHour < 18) {
+      greetingMessage = 'Good afternoon';
+    } else {
+      greetingMessage = 'Good evening';
+    }
+  
+    return greetingMessage;
+  });
 
   // --------------- EVENT HANDLING ----------------------
 
@@ -39,6 +69,5 @@ export class GreetingComponent implements OnInit {
 
   // --------------- LOAD AND CLEANUP --------------------
   
-  ngOnInit(): void {
-  }
+
 }
