@@ -7,6 +7,7 @@ import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.component'; 
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
+import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.component';
 import { DateTimeComponent } from './date-time/date-time.component';
 import { GreetingComponent } from './greeting/greeting.component';
 

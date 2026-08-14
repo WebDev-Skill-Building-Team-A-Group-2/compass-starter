@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector, OutputEmitterRef } from '@angular/core';
 import { LongTermGoalsHeaderAnimations } from './long-term-goals-header.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -20,7 +20,7 @@ export class LongTermGoalsHeaderComponent implements OnInit {
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-
+  editClicked: OutputEmitterRef<boolean> = output<boolean>();
   // --------------- LOCAL UI STATE ----------------------
 
   /** Loading icon. */
@@ -30,6 +30,13 @@ export class LongTermGoalsHeaderComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
 
+  /*
+  * emits editClicked output to parent component
+  * to display snackbar
+  */
+  editGoals(){
+    this.editClicked.emit(true);
+  }
   // --------------- OTHER -------------------------------
 
   constructor(
