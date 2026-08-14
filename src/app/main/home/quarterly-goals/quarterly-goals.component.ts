@@ -4,6 +4,7 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { QuarterlyGoalsItemComponent } from './quarterly-goals-item/quarterly-goals-item.component';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterly-goals-header.component';
 import { QuarterlyGoalData } from '../home.model';
 import { Timestamp } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   animations: QuarterlyGoalsAnimations,
   standalone: true,
   imports: [
-    QuarterlyGoalsItemComponent,
+    QuarterlyGoalsHeaderComponent,
+    QuarterlyGoalsItemComponent
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
@@ -77,6 +79,14 @@ export class QuarterlyGoalsComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
+  
+  editQuarterlyGoals(isEditing: boolean) {
+    this._snackBar.open('Edit quarter goals', '', {
+      duration: 1000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+    });
+  }
 
   onGoalToggled(goal: QuarterlyGoalData) {
     goal.completed = !goal.completed;
