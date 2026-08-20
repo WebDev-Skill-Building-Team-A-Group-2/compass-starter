@@ -1,7 +1,31 @@
 :host {
   display: block;
+  
   .long-term-goals-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    width: 30%;
+    height: 100px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 60px;
+    box-sizing: border-box;
+    padding: 25px 20px 12px 21px;
+
+    .title {
+      font-weight: 400;
+      font-size: 30px;
+      color: #4B5853;
+      margin: 0;
+    }
+
+    .edit-button {
+      margin: 0px 0px 0px 70px;
+      background: transparent;
+      border: none;
+    }
+    
+    .edit-icon {
+      width: 20px;
+    }
   }
 }

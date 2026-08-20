@@ -1,7 +1,50 @@
 :host {
   display: block;
   .date-time-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #2DBDB1;
+    text-align: right;
+    font-family: 'Oxygen', sans-serif;
+    
+    .time {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  
+      .hour-minutes {
+        font-size: 56px;
+        margin-top: 4px;
+      }
+    
+      .period-seconds-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 56px;
+        width: 32px;
+        margin-bottom: 8px;
+        
+        .period {
+          font-size: 15px;
+          line-height: 1;
+        }
+        
+        .seconds {
+          color: #2DBDB1;
+          font-size: 15px;
+          letter-spacing: 4px;
+          line-height: 1;
+          margin-right: -2px;
+        }
+      }
+    }
+    
+    .date {
+      color: #4B5853;
+      font-size: 19px;
+    }
   }
 }
