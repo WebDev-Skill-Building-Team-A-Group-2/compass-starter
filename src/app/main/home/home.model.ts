@@ -12,3 +12,14 @@ export interface QuarterlyGoalData extends QuarterlyGoal {
   weeklyGoalsTotal: number;
   weeklyGoalsComplete: number;
 }
+
+export interface QuarterlyGoalInForm {
+  text: string;
+  hashtagName: string;
+  hashtagColor: string;
+  originalText: string;
+  originalOrder: number;
+  __quarterlyGoalId: string;
+  _deleted: boolean;
+  _new: boolean;
+}

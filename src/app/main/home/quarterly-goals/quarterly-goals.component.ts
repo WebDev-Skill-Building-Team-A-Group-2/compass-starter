@@ -8,6 +8,9 @@ import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterl
 import { QuarterlyGoalData } from '../home.model';
 import { Timestamp } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuarterlyGoalsModalComponent } from './quarterly-goals-modal/quarterly-goals-modal.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-quarterly-goals',
@@ -17,13 +20,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   animations: QuarterlyGoalsAnimations,
   standalone: true,
   imports: [
+    QuarterlyGoalsItemComponent,
+    QuarterlyGoalsModalComponent,
     QuarterlyGoalsHeaderComponent,
-    QuarterlyGoalsItemComponent
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   private _snackBar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The current signed in user. */
@@ -76,18 +81,36 @@ export class QuarterlyGoalsComponent implements OnInit {
     },
   ];
 
+private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
+  
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  
-  editQuarterlyGoals(isEditing: boolean) {
-    this._snackBar.open('Edit quarter goals', '', {
-      duration: 1000,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'center',
+
+  openModal(isEditing: boolean) {
+    this.dialogRef = this.dialog.open(QuarterlyGoalsModalComponent, {
+      height: '90%',
+      width: '80%',
+      position: { bottom: '0' },
+      panelClass: 'goal-modal-panel',
+      data: {
+        goalDatas: this.quarterlyGoals,
+        updateQuarterlyGoals: async (goalsFormArray: FormArray) => {
+          try {
+            this._snackBar.open('Goals were updated', '', {
+              duration: 3000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center',
+            });
+            this.dialogRef.close();
+          } catch (e) {
+            console.error(e);
+          }
+        },
+      },
     });
   }
-
+  
   onGoalToggled(goal: QuarterlyGoalData) {
     goal.completed = !goal.completed;
     this._snackBar.open(
