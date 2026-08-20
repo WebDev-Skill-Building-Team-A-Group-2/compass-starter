@@ -10,6 +10,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-header.component';
 import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-weekly-goals',
@@ -26,6 +27,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class WeeklyGoalsComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+    private _snackBar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialog);
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The current signed in user. */
@@ -36,28 +39,31 @@ export class WeeklyGoalsComponent implements OnInit {
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
 
+  private dialogRef!: MatDialogRef<WeeklyGoalsModalComponent>;
+
   // --------------- COMPUTED DATA -----------------------
-    myTestGoal: WeeklyGoalData = {
-      __id: 'wg1',
-      __userId: 'test-user',
-      __quarterlyGoalId: 'qg1',
-      __hashtagId: 'ht1',
-      text: 'Finish Google Cover Letter',
-      completed: false,
-      order: 1,
+
+  myTestGoal: WeeklyGoalData = {
+    __id: 'wg1',
+    __userId: 'test-user',
+    __quarterlyGoalId: 'qg1',
+    __hashtagId: 'ht1',
+    text: 'Finish Google Cover Letter',
+    completed: false,
+    order: 1,
+    _createdAt: Timestamp.now(),
+    _updatedAt: Timestamp.now(),
+    _deleted: false,
+    hashtag: {
+      __id: 'ht1',
+      __userId: 'test-user',
+      name: 'apply-internships',
+      color: '#EE8B72',
       _createdAt: Timestamp.now(),
       _updatedAt: Timestamp.now(),
       _deleted: false,
-      hashtag: {
-       __id: 'ht1',
-       __userId: 'test-user',
-       name: 'apply-internships',
-       color: '#EE8B72',
-       _createdAt: Timestamp.now(),
-       _updatedAt: Timestamp.now(),
-       _deleted: false,
-      },
-    };
+    },
+  };
 
   // --------------- EVENT HANDLING ----------------------
   onGoalChecked(goal: WeeklyGoalData) {
@@ -70,6 +76,15 @@ export class WeeklyGoalsComponent implements OnInit {
         horizontalPosition: 'center',
       },
     );
+  }
+
+  openModal(editClicked: boolean) {
+    this.dialogRef = this.dialog.open(WeeklyGoalsModalComponent, {
+      height: '90%',
+      width: '80%',
+      position: { bottom: '0' },
+      panelClass: 'goal-modal-panel',
+    });
   }
 
   // --------------- OTHER -------------------------------

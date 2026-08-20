@@ -25,24 +25,24 @@ export class WeeklyGoalsHeaderComponent implements OnInit {
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
+  pencilClicked = output<boolean>();
+
   // --------------- LOCAL UI STATE ----------------------
 
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
 
   // --------------- COMPUTED DATA -----------------------
+
   endOfWeek = endOfWeek;
   startOfWeek = startOfWeek;
+
   // --------------- EVENT HANDLING ----------------------
 
-
   editGoals() {
-    this._snackBar.open('Edit weekly goals', '', {
-      duration: 3000,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'center',
-    });
+    this.pencilClicked.emit(true);
   }
+
   // --------------- OTHER -------------------------------
 
   constructor(

@@ -86,18 +86,11 @@ private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  
-  editQuarterlyGoals(isEditing: boolean) {
-    this._snackBar.open('Edit quarter goals', '', {
-      duration: 1000,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'center',
-    });
-  }
 
-  openModal() {
+  openModal(isEditing: boolean) {
     this.dialogRef = this.dialog.open(QuarterlyGoalsModalComponent, {
       height: '90%',
+      width: '80%',
       position: { bottom: '0' },
       panelClass: 'goal-modal-panel',
       data: {

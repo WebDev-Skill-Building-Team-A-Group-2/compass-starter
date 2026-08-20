@@ -19,6 +19,7 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   
   // --------------- INPUTS AND OUTPUTS ------------------
+
   editQuarterlyGoals = output<boolean>();
 
   /** The current signed in user. */
