@@ -4,6 +4,7 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { QuarterlyGoalsItemComponent } from './quarterly-goals-item/quarterly-goals-item.component';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterly-goals-header.component';
 import { QuarterlyGoalData } from '../home.model';
 import { Timestamp } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,6 +22,7 @@ import { FormArray } from '@angular/forms';
   imports: [
     QuarterlyGoalsItemComponent,
     QuarterlyGoalsModalComponent,
+    QuarterlyGoalsHeaderComponent,
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
@@ -84,32 +86,38 @@ private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-
+  
+  editQuarterlyGoals(isEditing: boolean) {
+    this._snackBar.open('Edit quarter goals', '', {
+      duration: 1000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+    });
+  }
 
   openModal() {
-  this.dialogRef = this.dialog.open(QuarterlyGoalsModalComponent, {
-    height: '90%',
-    position: { bottom: '0' },
-    panelClass: 'goal-modal-panel',
-    data: {
-      goalDatas: this.quarterlyGoals,
-      updateQuarterlyGoals: async (goalsFormArray: FormArray) => {
-        try {
-          this._snackBar.open('Goals were updated', '', {
-            duration: 3000,
-            verticalPosition: 'bottom',
-            horizontalPosition: 'center',
-          });
-          this.dialogRef.close();
-        } catch (e) {
-          console.error(e);
-        }
+    this.dialogRef = this.dialog.open(QuarterlyGoalsModalComponent, {
+      height: '90%',
+      position: { bottom: '0' },
+      panelClass: 'goal-modal-panel',
+      data: {
+        goalDatas: this.quarterlyGoals,
+        updateQuarterlyGoals: async (goalsFormArray: FormArray) => {
+          try {
+            this._snackBar.open('Goals were updated', '', {
+              duration: 3000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center',
+            });
+            this.dialogRef.close();
+          } catch (e) {
+            console.error(e);
+          }
+        },
       },
-    },
-  });
-}
+    });
+  }
   
-
   onGoalToggled(goal: QuarterlyGoalData) {
     goal.completed = !goal.completed;
     this._snackBar.open(
