@@ -8,9 +8,6 @@ core:
 first-time:
   - "src/app/first-time/**"
 
-main:
-  - "src/app/main/**"
-
 # Dashboard + notes and resources
 "main":
   - "src/app/main/**"
