@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProgressBarAnimations } from './progress-bar.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 
 /** Step definition for progress bar stepper. */
 export interface StepItem {
@@ -26,7 +25,7 @@ export interface StepItem {
     MatIconModule,
   ],
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent {
   readonly authStore = inject(AuthStore);
 
   // --------------- INPUTS AND OUTPUTS ------------------
@@ -51,27 +50,18 @@ export class ProgressBarComponent implements OnInit {
     { label: 'ORGANIZE', index: 4 },
   ];
 
-  /** Loading icon. */
-  readonly loading: WritableSignal<boolean> = signal(false);
-
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
 
-  /** Handles clicking the top-left back button. */
+  /**
+   * Handles clicking the top-left back button and emits navigation event.
+   */
   onBackClick(): void {
     this.navigateBack.emit();
   }
 
   // --------------- OTHER -------------------------------
 
-  constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-  ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
-  
-  ngOnInit(): void {
-  }
 }

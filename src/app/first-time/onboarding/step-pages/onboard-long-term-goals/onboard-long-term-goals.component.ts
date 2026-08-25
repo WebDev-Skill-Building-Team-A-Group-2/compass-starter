@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, effect, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, Signal, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { OnboardLongTermGoalsAnimations } from './onboard-long-term-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 
 /** Initial values and return data for the long-term goals step. */
 export interface LongTermGoalsFormData {
@@ -30,7 +29,7 @@ export interface LongTermGoalsFormData {
     MatFormFieldModule,
   ],
 })
-export class OnboardLongTermGoalsComponent implements OnInit {
+export class OnboardLongTermGoalsComponent {
   readonly authStore = inject(AuthStore);
 
   // --------------- INPUTS AND OUTPUTS ------------------
@@ -55,19 +54,21 @@ export class OnboardLongTermGoalsComponent implements OnInit {
   /** 5-Year goal input value. */
   readonly fiveYear = signal<string>('');
 
-  /** Loading indicator. */
-  readonly loading: WritableSignal<boolean> = signal(false);
-
   // --------------- COMPUTED DATA -----------------------
 
-  /** Whether both goals satisfy the minimum length requirement. */
+  /**
+   * Computed boolean indicating whether both goal inputs are non-empty.
+   * @returns {boolean} True if both inputs have valid non-whitespace text.
+   */
   readonly isValid: Signal<boolean> = computed(() => {
     return this.oneYear().trim().length > 0 && this.fiveYear().trim().length > 0;
   });
 
   // --------------- EVENT HANDLING ----------------------
 
-  /** Handles advancing to the next step. */
+  /**
+   * Handles advancing to the next step by emitting trimmed form data.
+   */
   onNext(): void {
     if (this.isValid()) {
       this.next.emit({
@@ -77,17 +78,16 @@ export class OnboardLongTermGoalsComponent implements OnInit {
     }
   }
 
-  /** Handles clicking the Back button. */
+  /**
+   * Handles clicking the Back button.
+   */
   onBack(): void {
     this.back.emit();
   }
 
   // --------------- OTHER -------------------------------
 
-  constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-  ) {
+  constructor() {
     effect(() => {
       const initial = this.initialValues();
       if (initial) {
@@ -98,7 +98,4 @@ export class OnboardLongTermGoalsComponent implements OnInit {
   }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
-  ngOnInit(): void {
-  }
 }

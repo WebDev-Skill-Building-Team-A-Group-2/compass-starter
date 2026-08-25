@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, Signal, signal, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { OnboardingAnimations } from './onboarding.animations';
@@ -22,7 +22,7 @@ import { OnboardLongTermGoalsComponent, LongTermGoalsFormData } from './step-pag
     OnboardLongTermGoalsComponent,
   ],
 })
-export class OnboardingComponent implements OnInit {
+export class OnboardingComponent {
   readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
   
@@ -48,7 +48,8 @@ export class OnboardingComponent implements OnInit {
 
   /**
    * Handles the submission of long-term goals from the presenter card.
-   * @param goals The 1-year and 5-year goal values.
+   * @param {LongTermGoalsFormData} goals - The 1-year and 5-year goal values.
+   * @returns {Promise<void>}
    */
   async onLongTermGoalsNext(goals: LongTermGoalsFormData): Promise<void> {
     this.longTermGoals.set(goals);
@@ -80,7 +81,7 @@ export class OnboardingComponent implements OnInit {
   }
 
   /**
-   * Handles back navigation (e.g. from top bar back button or card back button).
+   * Handles back navigation to the landing page.
    */
   onPreviousStep(): void {
     this.router.navigate(['/landing']);
@@ -89,14 +90,10 @@ export class OnboardingComponent implements OnInit {
   // --------------- OTHER -------------------------------
 
   constructor(
-    private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
     @Inject(DATABASE_SERVICE) private db: DatabaseService,
   ) {
   }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
-  ngOnInit(): void {
-  }
 }
