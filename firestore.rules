@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && resource.data.__userId == request.auth.uid;
+    }
+
+    function willBeDocOwner() {
+      return isAuthenticated() && request.resource.data.__userId == request.auth.uid;
+    }
+
+    // ------------- Long-Term Goals Collection ------------
+    match /longTermGoals/{goalId} {
+      // 1. Read: Only the document owner can read their goal
+      allow read: if isDocOwner();
+
+      // 2. Create: Authenticated user creating their own document with non-empty string fields
+      allow create: if willBeDocOwner()
+        && request.resource.data.oneYear is string
+        && request.resource.data.oneYear.size() > 0
+        && request.resource.data.oneYear.size() <= 1000
+        && request.resource.data.fiveYear is string
+        && request.resource.data.fiveYear.size() > 0
+        && request.resource.data.fiveYear.size() <= 1000;
+
+      // 3. Update: Only owner can update; ownership cannot be mutated
+      allow update: if isDocOwner()
+        && request.resource.data.__userId == resource.data.__userId;
+
+      // 4. Delete: Only owner can delete
+      allow delete: if isDocOwner();
+    }
+  }
+}

@@ -1,3 +1,28 @@
-<div class="progress-bar-container">
-  progress-bar works!
-</div>
+<header class="progress-bar-header">
+  <div class="header-inner">
+    <!-- Top-Left Circular Back Button -->
+    <button class="back-circle-btn" type="button" (click)="onBackClick()" aria-label="Go back">
+      <svg class="back-icon" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="#2dbdb1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Stepper Navigation -->
+    <nav class="stepper-nav" aria-label="Onboarding Progress">
+      <div class="stepper-track">
+        @for (step of steps; track step.index; let last = $last) {
+          <!-- Step Node -->
+          <div class="step-node" [class.active]="step.index === currentStep()" [class.completed]="step.index < currentStep()">
+            <span class="step-label">{{ step.label }}</span>
+            <div class="step-circle-indicator"></div>
+          </div>
+
+          <!-- Connector Line -->
+          @if (!last) {
+            <div class="step-connector-line" [class.active-line]="step.index <= currentStep()"></div>
+          }
+        }
+      </div>
+    </nav>
+  </div>
+</header>

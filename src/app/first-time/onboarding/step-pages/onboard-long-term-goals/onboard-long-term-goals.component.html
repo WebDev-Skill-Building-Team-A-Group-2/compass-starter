@@ -1,3 +1,52 @@
-<div class="onboard-long-term-goals-container">
-  onboard-long-term-goals works!
+<div class="goal-card-wrapper">
+  <div class="goal-card">
+    <!-- Header -->
+    <header class="card-header">
+      <h1 class="card-title">What are your long term goals?</h1>
+      <p class="card-subtitle">Keep it short & sweet.</p>
+    </header>
+
+    <!-- Goal Form -->
+    <form class="goal-form" (ngSubmit)="onNext()">
+      <!-- 1 Year Goal -->
+      <div class="form-group">
+        <label for="oneYearInput" class="field-label">1 YEAR GOAL</label>
+        <input
+          id="oneYearInput"
+          type="text"
+          class="underline-input"
+          placeholder="Secure SWE or UX Engineering Internship"
+          [value]="oneYear()"
+          (input)="oneYear.set($any($event.target).value)"
+          maxlength="500"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- 5 Year Goal -->
+      <div class="form-group">
+        <label for="fiveYearInput" class="field-label">5 YEAR GOAL</label>
+        <input
+          id="fiveYearInput"
+          type="text"
+          class="underline-input"
+          placeholder="Working as a SWE in a team I love with some UX/Design oriented work"
+          [value]="fiveYear()"
+          (input)="fiveYear.set($any($event.target).value)"
+          maxlength="500"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="card-actions">
+        <button mat-stroked-button type="button" class="btn-step-back" (click)="onBack()">
+          Back
+        </button>
+        <button mat-flat-button color="primary" type="submit" class="btn-step-next" [disabled]="!isValid()">
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

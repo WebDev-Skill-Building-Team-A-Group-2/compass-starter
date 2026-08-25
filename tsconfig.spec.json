@@ -9,7 +9,10 @@
     "esModuleInterop": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"],
+    "types": [
+      "jasmine",
+      "node"
+    ],
     "outDir": "./out-tsc/spec"
   },
   "include": [

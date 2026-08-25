@@ -1,8 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ProgressBarAnimations } from './progress-bar.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+
+/** Step definition for progress bar stepper. */
+export interface StepItem {
+  label: string;
+  index: number;
+}
 
 @Component({
   selector: 'app-progress-bar',
@@ -12,23 +21,47 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   animations: ProgressBarAnimations,
   standalone: true,
   imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class ProgressBarComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
+  /** The currently active step index (0-indexed). */
+  readonly currentStep = input<number>(0);
+
+  /** Emitted when the top-left back button is clicked. */
+  readonly navigateBack = output<void>();
+
   /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
+  readonly currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
 
+  /** 5 primary wizard milestones. */
+  readonly steps: StepItem[] = [
+    { label: 'LONG TERM GOALS', index: 0 },
+    { label: 'QUARTER GOALS', index: 1 },
+    { label: 'ORGANIZE', index: 2 },
+    { label: 'WEEKLY GOALS', index: 3 },
+    { label: 'ORGANIZE', index: 4 },
+  ];
+
   /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
+  readonly loading: WritableSignal<boolean> = signal(false);
 
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
+
+  /** Handles clicking the top-left back button. */
+  onBackClick(): void {
+    this.navigateBack.emit();
+  }
 
   // --------------- OTHER -------------------------------
 

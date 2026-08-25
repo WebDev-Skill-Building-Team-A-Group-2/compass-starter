@@ -1,3 +1,16 @@
-<div class="onboarding-container">
-   <div>add onboarding flow here!</div>
+<div class="onboarding-page-container">
+  <!-- Top Progress Bar with Step 1 Active -->
+  <app-progress-bar
+    [currentStep]="0"
+    (navigateBack)="onPreviousStep()"
+  />
+
+  <!-- Onboarding Step 1: Long-Term Goals Card -->
+  <main class="onboarding-main-content">
+    <app-onboard-long-term-goals
+      [initialValues]="longTermGoals()"
+      (next)="onLongTermGoalsNext($event)"
+      (back)="onPreviousStep()"
+    />
+  </main>
 </div>
