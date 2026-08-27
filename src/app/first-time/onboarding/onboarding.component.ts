@@ -1,13 +1,18 @@
-import { Component, ChangeDetectionStrategy, inject, Signal, signal, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, Signal, signal, computed, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { OnboardingAnimations } from './onboarding.animations';
-import { User } from 'src/app/core/store/user/user.model';
+import { User, OnboardingState, ONBOARDING_SEQUENCE, ONBOARDING_STEP_INDEX } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { DATABASE_SERVICE, DatabaseService } from 'src/app/core/firebase/database.service';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { OnboardLongTermGoalsComponent, LongTermGoalsFormData } from './step-pages/onboard-long-term-goals/onboard-long-term-goals.component';
+import { OnboardLongTermTransitionComponent } from './step-pages/onboard-long-term-transition/onboard-long-term-transition.component';
+import { OnboardQuarterlyGoalsComponent } from './step-pages/onboard-quarterly-goals/onboard-quarterly-goals.component';
+import { OrganizeQuarterlyGoalsComponent } from './step-pages/organize-quarterly-goals/organize-quarterly-goals.component';
+import { OnboardWeeklyGoalsComponent } from './step-pages/onboard-weekly-goals/onboard-weekly-goals.component';
+import { FinalPageComponent } from './step-pages/final-page/final-page.component';
 
 @Component({
   selector: 'app-onboarding',
@@ -20,6 +25,11 @@ import { OnboardLongTermGoalsComponent, LongTermGoalsFormData } from './step-pag
     CommonModule,
     ProgressBarComponent,
     OnboardLongTermGoalsComponent,
+    OnboardLongTermTransitionComponent,
+    OnboardQuarterlyGoalsComponent,
+    OrganizeQuarterlyGoalsComponent,
+    OnboardWeeklyGoalsComponent,
+    FinalPageComponent,
   ],
 })
 export class OnboardingComponent {
@@ -33,6 +43,9 @@ export class OnboardingComponent {
   
   // --------------- LOCAL UI STATE ----------------------
 
+  /** Expose OnboardingState enum for template switch-case matching. */
+  readonly OnboardingState = OnboardingState;
+
   /** Loading state during asynchronous operations. */
   readonly loading = signal<boolean>(false);
 
@@ -44,17 +57,27 @@ export class OnboardingComponent {
 
   // --------------- COMPUTED DATA -----------------------
 
+  /** Active milestone index (0-4) mapped from current user onboarding state. */
+  readonly currentStepIndex: Signal<number> = computed(() => {
+    const state = this.currentUser()?.onboardingState;
+    return (state && ONBOARDING_STEP_INDEX[state]) ?? 0;
+  });
+
   // --------------- EVENT HANDLING ----------------------
 
   /**
-   * Handles the submission of long-term goals from the presenter card.
+   * Handles the submission of long-term goals and advances to Step 2 transition.
    * @param {LongTermGoalsFormData} goals - The 1-year and 5-year goal values.
    * @returns {Promise<void>}
    */
   async onLongTermGoalsNext(goals: LongTermGoalsFormData): Promise<void> {
     this.longTermGoals.set(goals);
     const user = this.currentUser();
-    const userId = user?.__id || 'demo-user';
+    if (!user?.__id) {
+      console.error('No authenticated user found while saving long-term goals.');
+      return;
+    }
+    const userId = user.__id;
 
     try {
       await this.batch.batchWrite(
@@ -65,6 +88,10 @@ export class OnboardingComponent {
             __userId: userId,
             oneYear: goals.oneYear,
             fiveYear: goals.fiveYear,
+          }, batch as any);
+
+          await this.db.updateEntity('users', userId, {
+            onboardingState: OnboardingState.STEP_2,
           }, batch as any);
         },
         {
@@ -81,10 +108,22 @@ export class OnboardingComponent {
   }
 
   /**
-   * Handles back navigation to the landing page.
+   * Handles back navigation to the previous onboarding step or the landing page.
+   * @returns {Promise<void>}
    */
-  onPreviousStep(): void {
-    this.router.navigate(['/landing']);
+  async onPreviousStep(): Promise<void> {
+    const user = this.currentUser();
+    const state = user?.onboardingState;
+    const currentIndex = state ? ONBOARDING_SEQUENCE.indexOf(state) : -1;
+
+    if (user && currentIndex > 0) {
+      const prevState = ONBOARDING_SEQUENCE[currentIndex - 1];
+      await this.db.updateEntity('users', user.__id, {
+        onboardingState: prevState,
+      });
+    } else {
+      this.router.navigate(['/landing']);
+    }
   }
 
   // --------------- OTHER -------------------------------

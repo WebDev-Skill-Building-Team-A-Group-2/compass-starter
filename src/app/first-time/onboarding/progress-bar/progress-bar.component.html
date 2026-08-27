@@ -19,7 +19,7 @@
 
           <!-- Connector Line -->
           @if (!last) {
-            <div class="step-connector-line" [class.active-line]="step.index <= currentStep()"></div>
+            <div class="step-connector-line" [class.active-line]="step.index < currentStep()"></div>
           }
         }
       </div>

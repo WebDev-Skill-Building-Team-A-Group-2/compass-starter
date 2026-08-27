@@ -13,11 +13,12 @@
         <label for="oneYearInput" class="field-label">1 YEAR GOAL</label>
         <input
           id="oneYearInput"
+          name="oneYearInput"
           type="text"
           class="underline-input"
           placeholder="Secure SWE or UX Engineering Internship"
-          [value]="oneYear()"
-          (input)="oneYear.set($any($event.target).value)"
+          [ngModel]="oneYear()"
+          (ngModelChange)="oneYear.set($event)"
           maxlength="500"
           autocomplete="off"
         />
@@ -28,11 +29,12 @@
         <label for="fiveYearInput" class="field-label">5 YEAR GOAL</label>
         <input
           id="fiveYearInput"
+          name="fiveYearInput"
           type="text"
           class="underline-input"
           placeholder="Working as a SWE in a team I love with some UX/Design oriented work"
-          [value]="fiveYear()"
-          (input)="fiveYear.set($any($event.target).value)"
+          [ngModel]="fiveYear()"
+          (ngModelChange)="fiveYear.set($event)"
           maxlength="500"
           autocomplete="off"
         />
