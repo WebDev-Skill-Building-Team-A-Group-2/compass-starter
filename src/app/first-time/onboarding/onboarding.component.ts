@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy, inject, Signal, signal, computed, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, inject, Signal, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnboardingAnimations } from './onboarding.animations';
-import { User, OnboardingState, ONBOARDING_SEQUENCE, ONBOARDING_STEP_INDEX } from 'src/app/core/store/user/user.model';
+import { OnboardingState, ONBOARDING_SEQUENCE, ONBOARDING_STEP_INDEX } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
-import { DATABASE_SERVICE, DatabaseService } from 'src/app/core/firebase/database.service';
+import { BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { DATABASE_SERVICE } from 'src/app/core/firebase/database.service';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { OnboardLongTermGoalsComponent, LongTermGoalsFormData } from './step-pages/onboard-long-term-goals/onboard-long-term-goals.component';
 import { OnboardLongTermTransitionComponent } from './step-pages/onboard-long-term-transition/onboard-long-term-transition.component';
@@ -22,7 +21,6 @@ import { FinalPageComponent } from './step-pages/final-page/final-page.component
   standalone: true,
   animations: OnboardingAnimations,
   imports: [
-    CommonModule,
     ProgressBarComponent,
     OnboardLongTermGoalsComponent,
     OnboardLongTermTransitionComponent,
@@ -35,12 +33,11 @@ import { FinalPageComponent } from './step-pages/final-page/final-page.component
 export class OnboardingComponent {
   readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
-  
+  private readonly batch = inject(BATCH_WRITE_SERVICE);
+  private readonly db = inject(DATABASE_SERVICE);
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The currently signed in user. */
-  readonly currentUser: Signal<User> = this.authStore.user;
-  
   // --------------- LOCAL UI STATE ----------------------
 
   /** Expose OnboardingState enum for template switch-case matching. */
@@ -59,7 +56,7 @@ export class OnboardingComponent {
 
   /** Active milestone index (0-4) mapped from current user onboarding state. */
   readonly currentStepIndex: Signal<number> = computed(() => {
-    const state = this.currentUser()?.onboardingState;
+    const state = this.authStore.user()?.onboardingState;
     return (state && ONBOARDING_STEP_INDEX[state]) ?? 0;
   });
 
@@ -72,7 +69,7 @@ export class OnboardingComponent {
    */
   async onLongTermGoalsNext(goals: LongTermGoalsFormData): Promise<void> {
     this.longTermGoals.set(goals);
-    const user = this.currentUser();
+    const user = this.authStore.user();
     if (!user?.__id) {
       console.error('No authenticated user found while saving long-term goals.');
       return;
@@ -88,11 +85,11 @@ export class OnboardingComponent {
             __userId: userId,
             oneYear: goals.oneYear,
             fiveYear: goals.fiveYear,
-          }, batch as any);
+          }, batch);
 
           await this.db.updateEntity('users', userId, {
             onboardingState: OnboardingState.STEP_2,
-          }, batch as any);
+          }, batch);
         },
         {
           loading: this.loading,
@@ -100,7 +97,7 @@ export class OnboardingComponent {
             successMessage: 'Long-term goals saved successfully!',
             failureMessage: 'Failed to save goals. Please try again.',
           },
-        }
+        },
       );
     } catch (err) {
       console.error('Failed to save long-term goals:', err);
@@ -112,7 +109,7 @@ export class OnboardingComponent {
    * @returns {Promise<void>}
    */
   async onPreviousStep(): Promise<void> {
-    const user = this.currentUser();
+    const user = this.authStore.user();
     const state = user?.onboardingState;
     const currentIndex = state ? ONBOARDING_SEQUENCE.indexOf(state) : -1;
 
@@ -127,12 +124,6 @@ export class OnboardingComponent {
   }
 
   // --------------- OTHER -------------------------------
-
-  constructor(
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-    @Inject(DATABASE_SERVICE) private db: DatabaseService,
-  ) {
-  }
 
   // --------------- LOAD AND CLEANUP --------------------
 }

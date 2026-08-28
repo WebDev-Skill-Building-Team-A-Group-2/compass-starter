@@ -11,33 +11,17 @@
       <!-- 1 Year Goal -->
       <div class="form-group">
         <label for="oneYearInput" class="field-label">1 YEAR GOAL</label>
-        <input
-          id="oneYearInput"
-          name="oneYearInput"
-          type="text"
-          class="underline-input"
-          placeholder="Secure SWE or UX Engineering Internship"
-          [ngModel]="oneYear()"
-          (ngModelChange)="oneYear.set($event)"
-          maxlength="500"
-          autocomplete="off"
-        />
+        <input id="oneYearInput" name="oneYearInput" type="text" class="underline-input"
+          placeholder="Secure SWE or UX Engineering Internship" [ngModel]="oneYear()"
+          (ngModelChange)="oneYear.set($event)" maxlength="500" autocomplete="off" />
       </div>
 
       <!-- 5 Year Goal -->
       <div class="form-group">
         <label for="fiveYearInput" class="field-label">5 YEAR GOAL</label>
-        <input
-          id="fiveYearInput"
-          name="fiveYearInput"
-          type="text"
-          class="underline-input"
-          placeholder="Working as a SWE in a team I love with some UX/Design oriented work"
-          [ngModel]="fiveYear()"
-          (ngModelChange)="fiveYear.set($event)"
-          maxlength="500"
-          autocomplete="off"
-        />
+        <input id="fiveYearInput" name="fiveYearInput" type="text" class="underline-input"
+          placeholder="Working as a SWE in a team I love with some UX/Design oriented work" [ngModel]="fiveYear()"
+          (ngModelChange)="fiveYear.set($event)" maxlength="500" autocomplete="off" />
       </div>
 
       <!-- Actions -->

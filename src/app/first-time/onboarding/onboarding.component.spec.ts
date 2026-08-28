@@ -77,13 +77,13 @@ describe('OnboardingComponent', () => {
         oneYear: 'Land Internship',
         fiveYear: 'Lead Tech Projects',
       }),
-      jasmine.anything()
+      jasmine.anything(),
     );
     expect(mockDbService.updateEntity).toHaveBeenCalledWith(
       'users',
       'test-user-123',
       { onboardingState: OnboardingState.STEP_2 },
-      jasmine.anything()
+      jasmine.anything(),
     );
   });
 

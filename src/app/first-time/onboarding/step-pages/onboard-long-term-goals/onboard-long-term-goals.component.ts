@@ -1,12 +1,7 @@
-import { Component, ChangeDetectionStrategy, input, output, inject, Signal, signal, computed, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, input, output, Signal, signal, computed, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { OnboardLongTermGoalsAnimations } from './onboard-long-term-goals.animations';
-import { User } from 'src/app/core/store/user/user.model';
-import { AuthStore } from 'src/app/core/store/auth/auth.store';
 
 /** Initial values and return data for the long-term goals step. */
 export interface LongTermGoalsFormData {
@@ -22,16 +17,11 @@ export interface LongTermGoalsFormData {
   animations: OnboardLongTermGoalsAnimations,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
   ],
 })
 export class OnboardLongTermGoalsComponent {
-  readonly authStore = inject(AuthStore);
-
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** Optional initial values passed from parent container. */
@@ -42,9 +32,6 @@ export class OnboardLongTermGoalsComponent {
 
   /** Emits when user clicks Back. */
   readonly back = output<void>();
-
-  /** The current signed in user. */
-  readonly currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
 

@@ -1,36 +1,30 @@
 <div class="onboarding-page-container">
   <!-- Top Progress Bar with Dynamic Step Tracking -->
-  <app-progress-bar
-    [currentStep]="currentStepIndex()"
-    (navigateBack)="onPreviousStep()"
-  />
+  <app-progress-bar [currentStep]="currentStepIndex()" (navigateBack)="onPreviousStep()" />
 
   <!-- Main Onboarding Step Switcher -->
   <main class="onboarding-main-content">
-    @switch (currentUser()?.onboardingState) {
-      @case (OnboardingState.STEP_2) {
-        <app-onboard-long-term-transition />
-      }
-      @case (OnboardingState.STEP_3) {
-        <app-onboard-quarterly-goals />
-      }
-      @case (OnboardingState.STEP_4) {
-        <app-organize-quarterly-goals />
-      }
-      @case (OnboardingState.STEP_6) {
-        <app-onboard-weekly-goals />
-      }
-      @case (OnboardingState.DONE) {
-        <app-final-page />
-      }
-      @default {
-        <!-- Defaults to Step 1 (Long-Term Goals) for WELCOME or STEP_1 -->
-        <app-onboard-long-term-goals
-          [initialValues]="longTermGoals()"
-          (next)="onLongTermGoalsNext($event)"
-          (back)="onPreviousStep()"
-        />
-      }
+    @switch (authStore.user()?.onboardingState) {
+    @case (OnboardingState.STEP_2) {
+    <app-onboard-long-term-transition />
+    }
+    @case (OnboardingState.STEP_3) {
+    <app-onboard-quarterly-goals />
+    }
+    @case (OnboardingState.STEP_4) {
+    <app-organize-quarterly-goals />
+    }
+    @case (OnboardingState.STEP_6) {
+    <app-onboard-weekly-goals />
+    }
+    @case (OnboardingState.DONE) {
+    <app-final-page />
+    }
+    @default {
+    <!-- Defaults to Step 1 (Long-Term Goals) for WELCOME or STEP_1 -->
+    <app-onboard-long-term-goals [initialValues]="longTermGoals()" (next)="onLongTermGoalsNext($event)"
+      (back)="onPreviousStep()" />
+    }
     }
   </main>
 </div>
