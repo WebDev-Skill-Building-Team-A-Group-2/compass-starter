@@ -1,8 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ProgressBarAnimations } from './progress-bar.animations';
-import { User } from 'src/app/core/store/user/user.model';
-import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+
+/** Step definition for progress bar stepper. */
+export interface StepItem {
+  label: string;
+  index: number;
+}
 
 @Component({
   selector: 'app-progress-bar',
@@ -11,34 +14,40 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: ProgressBarAnimations,
   standalone: true,
-  imports: [
-  ],
+  imports: [],
 })
-export class ProgressBarComponent implements OnInit {
-  readonly authStore = inject(AuthStore);
+export class ProgressBarComponent {
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
+  /** The currently active step index (0-indexed). */
+  readonly currentStep = input<number>(0);
+
+  /** Emitted when the top-left back button is clicked. */
+  readonly navigateBack = output<void>();
 
   // --------------- LOCAL UI STATE ----------------------
 
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
+  /** 5 primary wizard milestones. */
+  readonly steps: StepItem[] = [
+    { label: 'LONG TERM GOALS', index: 0 },
+    { label: 'QUARTER GOALS', index: 1 },
+    { label: 'ORGANIZE', index: 2 },
+    { label: 'WEEKLY GOALS', index: 3 },
+    { label: 'ORGANIZE', index: 4 },
+  ];
 
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
 
+  /**
+   * Handles clicking the top-left back button and emits navigation event.
+   */
+  onBackClick(): void {
+    this.navigateBack.emit();
+  }
+
   // --------------- OTHER -------------------------------
 
-  constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-  ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
-  
-  ngOnInit(): void {
-  }
 }

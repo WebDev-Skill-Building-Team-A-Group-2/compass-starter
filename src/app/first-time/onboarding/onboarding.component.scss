@@ -1,5 +1,15 @@
-:host {
-  display: block;
-  .onboarding-container {
+.onboarding-page-container {
+  min-height: 100vh;
+  background-color: #eaf8f7;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  .onboarding-main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
   }
 }

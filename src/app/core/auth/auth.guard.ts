@@ -39,20 +39,33 @@ export class AuthGuard {
           if (state.url === '/' || state.url === '/landing') {
             return of(true);
           } else {
-            this.router.navigate(['/'], { queryParams: next.queryParams });
+            this.router.navigate(['/landing'], { queryParams: next.queryParams });
             return of(false);
           }
         }
 
         // AFTER THIS POINT, THE USER MUST BE LOGGED IN (i.e. dbUser exists)
+        const onboardingStates = [
+          OnboardingState.WELCOME,
+          OnboardingState.STEP_1,
+          OnboardingState.STEP_2,
+          OnboardingState.STEP_3,
+          OnboardingState.STEP_4,
+          OnboardingState.STEP_5,
+          OnboardingState.STEP_6,
+          OnboardingState.STEP_7,
+        ];
 
-        // If logged in and trying to access landing, redirect to the homepage
+        // If logged in and trying to access landing, redirect to onboarding if incomplete, else home
         if (state.url === '/' || state.url === '/landing') {
-          this.router.navigate(['/home'], { queryParams: next.queryParams });
+          if (onboardingStates.includes(dbUser.onboardingState)) {
+            this.router.navigate(['/onboarding'], { queryParams: next.queryParams });
+          } else {
+            this.router.navigate(['/home'], { queryParams: next.queryParams });
+          }
           return of(false);
         }
 
-        const onboardingStates = [OnboardingState.WELCOME, OnboardingState.STEP_1, OnboardingState.STEP_2, OnboardingState.STEP_3, OnboardingState.STEP_4, OnboardingState.STEP_5, OnboardingState.STEP_6, OnboardingState.STEP_7];
         if (onboardingStates.includes(dbUser.onboardingState) && state.url !== '/onboarding') {
           this.router.navigate(['/onboarding'], { queryParams: next.queryParams });
           return of(false);

@@ -1,7 +1,117 @@
-:host {
-  display: block;
-  .onboard-long-term-goals-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+.goal-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+
+.goal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 680px;
+  padding: 3.5rem 4rem 3rem 4rem;
+  box-sizing: border-box;
+
+  .card-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    .card-title {
+      color: #2dbdb1;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: -0.01em;
+    }
+
+    .card-subtitle {
+      color: #5a6578;
+      font-size: 1.15rem;
+      margin: 0;
+    }
+  }
+
+  .goal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .field-label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #2dbdb1;
+        text-transform: uppercase;
+      }
+
+      .underline-input {
+        border: none;
+        border-bottom: 1.5px solid #8e9a98;
+        padding: 0.6rem 0.1rem;
+        font-size: 1.05rem;
+        color: #2d3748;
+        font-family: inherit;
+        background: transparent;
+        transition: border-color 0.2s ease;
+        width: 100%;
+
+        &::placeholder {
+          color: #718096;
+          font-weight: 400;
+        }
+
+        &:focus {
+          outline: none;
+          border-bottom: 2px solid #2dbdb1;
+        }
+      }
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .btn-step-back {
+        border-color: #2dbdb1 !important;
+        color: #2dbdb1 !important;
+        border-radius: 8px !important;
+        padding: 0.4rem 1.75rem !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+      }
+
+      .btn-step-next {
+        background-color: #2dbdb1 !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        padding: 0.4rem 1.75rem !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+
+        &:disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .goal-card {
+    padding: 2rem 1.5rem;
+
+    .card-header .card-title {
+      font-size: 1.5rem;
+    }
   }
 }
