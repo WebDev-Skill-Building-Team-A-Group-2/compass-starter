@@ -1,3 +1,18 @@
 <div class="notes-header-container">
-  notes-header works!
+  <div class="notes-title-container">
+    <span class="notes-title">Notes and resources</span>
+    <div class="closing-icon-container">
+      <button class="close-button" (click)="closeHeader()">
+        <img src="images/close-x.svg" alt="Close"/>
+      </button>
+    </div>
+  </div>
+  <div class="notes-sub-header-container">
+    <span class="goal-sub-header-text">
+      For
+      <span class="notes-hashtag">
+        {{ hashtag }}
+      </span>
+    </span>
+  </div>
 </div>

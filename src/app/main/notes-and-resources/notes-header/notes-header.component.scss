@@ -1,7 +1,41 @@
 :host {
   display: block;
   .notes-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1264px;
+    background-color: #F2FFFE;
+    .notes-title-container {
+      display: flex;
+      flex-direction: row;
+      padding: 8px 0;
+      justify-content: space-between;
+      .notes-title {
+        font-size: 30px;
+        color: #5a5a5a;
+      }
+      .closing-icon-container {
+        height: 20px;
+        width: 34px;
+      }
+      .close-button {
+        border: none;
+        background-color: #F2FFFE;
+      }
+    }
+    .notes-sub-header-container {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 8px;
+      .goal-sub-header-text {
+        color: #5a5a5a;
+        font-size: 25px;
+      }
+      .notes-hashtag {
+        font-size: 25px;
+        color: #2dbdb1;
+      }
+    }
   }
 }

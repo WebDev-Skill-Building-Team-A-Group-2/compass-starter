@@ -29,6 +29,9 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     window.parent.postMessage({ type: 'angular-ready' }, '*');
+
+    // Automatically login to avoid landing page. Feel free to change.
+    await this.authStore.login('google.com', { doNotRoute: true });
     this.authStore.loadAuth();
   }
 }
