@@ -3,12 +3,13 @@ import { HomeAnimations } from './home.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { GreetingComponent } from './greeting/greeting.component';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.component'; 
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
 import { DateTimeComponent } from './date-time/date-time.component';
-import { GreetingComponent } from './greeting/greeting.component';
+import { QuarterlyGoalsSidebarComponent } from '../notes-and-resources/quarterly-goals-sidebar/quarterly-goals-sidebar.component';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ import { GreetingComponent } from './greeting/greeting.component';
     WeeklyGoalsComponent,
     LongTermGoalsComponent,
     QuarterlyGoalsComponent,
-    GreetingComponent
+    GreetingComponent,
+    QuarterlyGoalsSidebarComponent,
   ]
 })
 export class HomeComponent implements OnInit {
@@ -33,6 +35,7 @@ export class HomeComponent implements OnInit {
 
   /** The currently signed in user. */
   currentUser: Signal<User> = this.authStore.user;
+  
   
   // --------------- LOCAL UI STATE ----------------------
 

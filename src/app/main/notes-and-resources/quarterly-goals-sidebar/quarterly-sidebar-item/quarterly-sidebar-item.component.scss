@@ -1,7 +1,114 @@
-:host {
-  display: block;
-  .quarterly-sidebar-item-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+$text: #4b5853;
+$accent: #2dbdb1;
+
+.quarterly-sidebar {
+  width: 260px;
+  padding: 20px 16px;
+  background: white;
+  border: 2px solid #bfe9e4;
+  border-radius: 24px;
+  box-sizing: border-box;
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+
+    .sidebar-title {
+      margin: 0;
+      font-family: "Oxygen", sans-serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: $text;
+    }
+
+    .sidebar-subtitle {
+      font-size: 16px;
+      font-weight: 700;
+      color: $text;
+    }
+
+    .edit-button {
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      .edit-icon {
+        color: $accent;
+      }
+    }
+  }
+
+  .goal-divider {
+    height: 1px;
+    margin: 0 -34px; 
+    background: #d9d9d9;
+  }
+
+  .add-goal {
+    margin-top: 12px;
+    font-size: 14px;
+    color: $accent;
+    cursor: pointer;
+  }
+}
+
+.quarterly-sidebar-item-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 0;
+
+  mat-checkbox {
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .goal-content {
+    flex: 1;
+    min-width: 0;
+
+    .goal-title {
+      font-family: "Oxygen", sans-serif;
+      font-size: 14px;
+      color: $text;
+      line-height: 1.2;
+      transition: color 0.2s ease;
+    }
+
+    .goal-tag {
+      margin-top: 2px;
+      font-size: 12px;
+      color: $accent;
+      transition: color 0.2s ease;
+    }
+
+    &.completed {
+      .goal-title {
+        text-decoration: line-through;
+        text-decoration-color: $text;
+        color: #9aa5a1;
+      }
+
+      .goal-tag {
+        text-decoration: line-through;
+        color: #a9dcd6;
+      }
+    }
+  }
+
+  .goal-progress {
+    margin-left: 8px;
+    align-self: flex-start;
+    font-size: 12px;
+    color: #777;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+
+    &.completed {
+      color: #b5bdb9;
+    }
   }
 }

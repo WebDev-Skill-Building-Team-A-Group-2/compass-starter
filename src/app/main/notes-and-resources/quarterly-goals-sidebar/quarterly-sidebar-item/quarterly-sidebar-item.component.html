@@ -1,3 +1,37 @@
-<div class="quarterly-sidebar-item-container">
-  quarterly-sidebar-item works!
+<div class="quarterly-sidebar">
+  <div class="sidebar-header">
+    <div>
+      <h2 class="sidebar-title">Quarterly Goals</h2>
+      <div class="sidebar-subtitle">{{ quarterLabel }}</div>
+    </div>
+      <button class="edit-button" (click)="onEditClicked(true)" >
+        <img class= "edit-icon" src="/images/edit.svg">
+      </button>    
+  </div>
+  @for (goal of exampleQuarterlyGoals; track goal.__id; let last = $last) {
+    <div class="quarterly-sidebar-item-container">
+      <mat-checkbox
+        [checked]="goal.completed"
+        (change)="checkGoal(goal.__id)">
+      </mat-checkbox>
+
+      <div class="goal-content">
+        <div class="goal-title" [class.completed]="goal.completed">
+              {{ goal.text }}
+        </div>  
+        <div
+          class="goal-tag"
+          [style.color]="goal.hashtag.color">
+          #{{ goal.hashtag.name }}
+        </div>
+        <div class="goal-divider"></div>
+      </div>  
+      <div class="goal-progress">
+        {{ goal.weeklyGoalsComplete }} / {{ goal.weeklyGoalsTotal }}
+      </div>
+    </div>
+  }
+  <div class="add-quarterly-goal" (click)="onEditClicked(true)">
+    + Add quarterly goal
+  </div>
 </div>
