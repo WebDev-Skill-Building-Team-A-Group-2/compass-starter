@@ -24,6 +24,7 @@ import { QuarterlyGoalsSidebarComponent } from '../notes-and-resources/quarterly
     WeeklyGoalsComponent,
     LongTermGoalsComponent,
     QuarterlyGoalsComponent,
+    GreetingComponent,
     QuarterlyGoalsSidebarComponent,
   ]
 })
