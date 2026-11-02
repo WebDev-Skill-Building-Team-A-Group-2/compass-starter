@@ -1,15 +1,4 @@
-import { Component,
-         OnInit,
-         ChangeDetectionStrategy,
-         input,
-         output,
-         inject,
-         WritableSignal,
-         Signal,
-         signal,
-         computed,
-         Inject,
-         Injector } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { QuarterlyGoalsSidebarAnimations } from './quarterly-goals-sidebar.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -18,10 +7,9 @@ import { BatchWriteService,
 import { QuarterlySidebarItemComponent } from './quarterly-sidebar-item/quarterly-sidebar-item.component';
 import { QuarterlyGoalStore } from 'src/app/core/store/quarterly-goal/quarterly-goal.store';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog,
-         MatDialogRef } from '@angular/material/dialog';
-import { QuarterlyGoalsModalComponent } from '../../home/quarterly-goals/quarterly-goals-modal/quarterly-goals-modal.component';
-import { QuarterlyGoalData } from '../../home/home.model';
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { QuarterlyGoalsModalComponent } from 'src/app/main/home/quarterly-goals/quarterly-goals-modal/quarterly-goals-modal.component';
+import { QuarterlyGoalData } from 'src/app/main/home/home.model';
 import { FormArray } from '@angular/forms';
 
 @Component({
@@ -40,7 +28,7 @@ export class QuarterlyGoalsSidebarComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   readonly quarterlyGoalStore = inject(QuarterlyGoalStore);
   private _snackBar = inject(MatSnackBar);
-  private readonly dialog = inject(MatDialog)
+  private readonly dialog = inject(MatDialog);
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The current signed in user. */
@@ -58,6 +46,7 @@ export class QuarterlyGoalsSidebarComponent implements OnInit {
   quarterlyGoals = this.quarterlyGoalStore.entities;
 
   // --------------- EVENT HANDLING ----------------------
+  /*Opens a modal where you can edit goals*/
   openModal(isEditing: boolean) {
     this.dialogRef = this.dialog.open(QuarterlyGoalsModalComponent, {
       height: '90%',
@@ -81,7 +70,8 @@ export class QuarterlyGoalsSidebarComponent implements OnInit {
         },
     });
   }
-  
+    /*open a dialog box when goal is checked, telling whether goal
+  is completed or not*/ 
   onGoalToggled(goal: QuarterlyGoalData) {
     goal.completed = !goal.completed;
     this._snackBar.open(

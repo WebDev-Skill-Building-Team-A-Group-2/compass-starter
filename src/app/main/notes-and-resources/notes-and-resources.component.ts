@@ -1,17 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
-import { NotesAndResourcesAnimations } from './notes-and-resources.animations';
+import { NotesAndResourcesAnimations } from 'src/app/main/notes-and-resources/notes-and-resources.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { ActivatedRoute } from '@angular/router';
-import { QuarterlySidebarItemComponent } from './quarterly-goals-sidebar/quarterly-sidebar-item/quarterly-sidebar-item.component';
-import { LongTermGoalStore } from '../../core/store/long-term-goal/long-term-goal.store';
-import { QuarterlyGoalStore } from '../../core/store/quarterly-goal/quarterly-goal.store';
+import { QuarterlySidebarItemComponent } from 'src/app/main/notes-and-resources/quarterly-goals-sidebar/quarterly-sidebar-item/quarterly-sidebar-item.component';
+import { LongTermGoalStore } from 'src/app/core/store/long-term-goal/long-term-goal.store';
+import { QuarterlyGoalStore } from 'src/app/core/store/quarterly-goal/quarterly-goal.store';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { QuarterlyGoalsModalComponent } from '../home/quarterly-goals/quarterly-goals-modal/quarterly-goals-modal.component';
+import { QuarterlyGoalsModalComponent } from 'src/app/main/home/quarterly-goals/quarterly-goals-modal/quarterly-goals-modal.component';
 import { FormArray } from '@angular/forms';
-import { QuarterlyGoalData } from '../home/home.model';
+import { QuarterlyGoalData } from 'src/app/main/home/home.model';
 
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
-import { QuarterlySidebarItemAnimations } from './quarterly-sidebar-item.animations';
+import { QuarterlySidebarItemAnimations } from 'src/app/main/notes-and-resources/quarterly-goals-sidebar/quarterly-sidebar-item/quarterly-sidebar-item.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
-import { QuarterlyGoalData } from '../../../home/home.model';
+import { QuarterlyGoalData } from 'src/app/main/home/home.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Timestamp } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon'; 
@@ -15,8 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlySidebarItemAnimations,
   standalone: true,
-  imports: [MatCheckboxModule, MatIconModule
-  ],
+  imports: [MatCheckboxModule, MatIconModule],
 })
 /*code for the component class*/
 export class QuarterlySidebarItemComponent implements OnInit {
@@ -93,8 +92,8 @@ export class QuarterlySidebarItemComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  //open a dialog box when goal is checked, telling whether goal
-  //is completed or not 
+  /*open a dialog box when goal is checked, telling whether goal
+  is completed or not*/ 
    checkGoal(goalId: string): void {
     const goal = this.exampleQuarterlyGoals.find(
       g => g.__id === goalId
@@ -114,8 +113,8 @@ export class QuarterlySidebarItemComponent implements OnInit {
       duration: 3000,
     });
  }
-//when you click the edit button the modal from quarterly-goals-sidebar.component.ts
-//opens
+/*when you click the edit button the modal from quarterly-goals-sidebar.component.ts
+opens*/
  onEditClicked(isEditing: boolean) {
     this.editClicked.emit(isEditing);  
  }
