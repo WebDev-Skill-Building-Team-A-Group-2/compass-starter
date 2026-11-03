@@ -15,7 +15,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlySidebarItemAnimations,
   standalone: true,
-  imports: [MatCheckboxModule, MatIconModule],
+  imports: [
+        MatCheckboxModule,
+        MatIconModule,
+  ],
 })
 /*code for the component class*/
 export class QuarterlySidebarItemComponent implements OnInit {

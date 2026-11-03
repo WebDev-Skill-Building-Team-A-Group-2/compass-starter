@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
-import { QuarterlyGoalsSidebarAnimations } from './quarterly-goals-sidebar.animations';
+import { QuarterlyGoalsSidebarAnimations } from 'src/app/main/notes-and-resources/quarterly-goals-sidebar/quarterly-goals-sidebar.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService,
          BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
-import { QuarterlySidebarItemComponent } from './quarterly-sidebar-item/quarterly-sidebar-item.component';
+import { QuarterlySidebarItemComponent } from 'src/app/main/notes-and-resources/quarterly-goals-sidebar/quarterly-sidebar-item/quarterly-sidebar-item.component';
 import { QuarterlyGoalStore } from 'src/app/core/store/quarterly-goal/quarterly-goal.store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog,MatDialogRef } from '@angular/material/dialog';
@@ -20,9 +20,9 @@ import { FormArray } from '@angular/forms';
   animations: QuarterlyGoalsSidebarAnimations,
   standalone: true,
   imports: [
-    QuarterlySidebarItemComponent,
-    QuarterlyGoalsModalComponent
-  ],
+        QuarterlySidebarItemComponent,
+        QuarterlyGoalsModalComponent,           
+  ],  
 })
 export class QuarterlyGoalsSidebarComponent implements OnInit {
   readonly authStore = inject(AuthStore);
