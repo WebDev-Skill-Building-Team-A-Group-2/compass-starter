@@ -4,34 +4,52 @@
       <h2 class="sidebar-title">Quarterly Goals</h2>
       <div class="sidebar-subtitle">{{ quarterLabel }}</div>
     </div>
-      <button class="edit-button" (click)="onEditClicked(true)" >
-        <img class= "edit-icon" src="/images/edit.svg">
-      </button>    
+
+    <button class="edit-button" (click)="onEditClicked(true)">
+      <img class="edit-icon" src="/images/edit.svg" />
+    </button>
   </div>
-  @for (goal of exampleQuarterlyGoals; track goal.__id; let last = $last) {
+
+  @for (goal of quarterlyGoals; track goal.__id) {
     <div class="quarterly-sidebar-item-container">
+
       <mat-checkbox
         [checked]="goal.completed"
         (change)="checkGoal(goal.__id)">
       </mat-checkbox>
 
-      <div class="goal-content">
-        <div class="goal-title" [class.completed]="goal.completed">
-              {{ goal.text }}
-        </div>  
-        <div
-          class="goal-tag"
-          [style.color]="goal.hashtag.color">
-          #{{ goal.hashtag.name }}
+      <div
+        class="goal-content"
+        [class.completed]="goal.completed">
+
+        <div class="goal-title">
+          {{ goal.text }}
         </div>
+
+        @if (getHashtag(goal.__hashtagId); as hashtag) {
+          <div
+            class="goal-tag"
+            [style.color]="hashtag.color">
+            #{{ hashtag.name }}
+          </div>
+        }
+
         <div class="goal-divider"></div>
-      </div>  
-      <div class="goal-progress">
-        {{ goal.weeklyGoalsComplete }} / {{ goal.weeklyGoalsTotal }}
       </div>
+
+      <div
+        class="goal-progress"
+        [class.completed]="goal.completed">
+        {{ getWeeklyGoalsComplete(goal.__id) }} /
+        {{ getWeeklyGoalsTotal(goal.__id) }}
+      </div>
+
     </div>
   }
-  <div class="add-quarterly-goal" (click)="onEditClicked(true)">
+
+  <div
+    class="add-quarterly-goal"
+    (click)="onEditClicked(true)">
     + Add quarterly goal
   </div>
 </div>

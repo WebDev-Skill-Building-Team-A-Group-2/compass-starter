@@ -53,9 +53,7 @@ export class NotesAndResourcesComponent implements OnInit {
 
   // --------------- COMPUTED DATA -----------------------
   //entities for longTermGoals and quarterlyGoals.
-  longTermGoal = computed(() =>
-    this.longTermGoalStore.selectEntity(this.goalId())
-  );
+  longTermGoal = this.longTermGoalStore.selectEntity(this.goalId());
 
   quarterlyGoals = this.quarterlyGoalStore.entities;
   // --------------- EVENT HANDLING ----------------------
