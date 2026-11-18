@@ -3,6 +3,7 @@ import { NotesHeaderAnimations } from './notes-header.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-notes-header',
@@ -23,6 +24,9 @@ export class NotesHeaderComponent implements OnInit {
 
   // --------------- LOCAL UI STATE ----------------------
 
+  /** Goal hashtag category */
+  hashtag: string = "#apply-internships";
+
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
 
@@ -30,11 +34,24 @@ export class NotesHeaderComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
 
+  closeHeader() {
+    this.snackbar.open(
+      'Clicked on X Icon',
+      '',
+      {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+      },
+    );
+  };
+
   // --------------- OTHER -------------------------------
 
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private snackbar: MatSnackBar,
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
