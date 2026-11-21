@@ -15,23 +15,23 @@ import { LongTermGoal } from '../../../core/store/long-term-goal/long-term-goal.
   standalone: true,
   imports: [
     LongTermGoalsHeaderComponent,
-    LongTermGoalsItemComponent
+    LongTermGoalsItemComponent,
   ],
 })
 export class LongTermGoalsComponent implements OnInit {
   longTermGoals: LongTermGoal = {
-      __id: 'example-id',
-      __userId: 'example-user-id',
-      oneYear: 'Secure SWE or UX Engineering Internship',
-      fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work'
-    };
+    __id: 'example-id',
+    __userId: 'example-user-id',
+    oneYear: 'Secure SWE or UX Engineering Internship',
+    fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work',
+  };
 
   openModal(editClicked: boolean) {
-    this.snackBar.open("You clicked on the header...", '', {
+    this.snackBar.open('You clicked on the header...', '', {
       duration: 3000,
       verticalPosition: 'bottom',
       horizontalPosition: 'center',
-    
+
     });
   }
   // --------------- OTHER -------------------------------
@@ -43,7 +43,7 @@ export class LongTermGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

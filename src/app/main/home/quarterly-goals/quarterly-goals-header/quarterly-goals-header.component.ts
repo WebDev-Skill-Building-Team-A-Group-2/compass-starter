@@ -17,7 +17,7 @@ import { getQuarterAndYear } from 'src/app/core/utils/time.utils';
 })
 export class QuarterlyGoalsHeaderComponent implements OnInit {
   readonly authStore = inject(AuthStore);
-  
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
   editQuarterlyGoals = output<boolean>();
@@ -35,8 +35,8 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
   onEditClicked(isEditing: boolean) {
-    this.editQuarterlyGoals.emit(isEditing);  
-}
+    this.editQuarterlyGoals.emit(isEditing);
+  }
 
   // --------------- OTHER -------------------------------
 
@@ -46,7 +46,7 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

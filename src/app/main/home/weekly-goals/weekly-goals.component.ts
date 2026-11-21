@@ -22,12 +22,12 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   imports: [
     WeeklyGoalsHeaderComponent,
     WeeklyGoalsItemComponent,
-    WeeklyGoalsModalComponent
+    WeeklyGoalsModalComponent,
   ],
 })
 export class WeeklyGoalsComponent implements OnInit {
   readonly authStore = inject(AuthStore);
-    private _snackBar = inject(MatSnackBar);
+  private _snackBar = inject(MatSnackBar);
   private readonly dialog = inject(MatDialog);
   // --------------- INPUTS AND OUTPUTS ------------------
 
@@ -43,26 +43,26 @@ export class WeeklyGoalsComponent implements OnInit {
 
   // --------------- COMPUTED DATA -----------------------
 
-  myTestGoal: WeeklyGoalData = {
-    __id: 'wg1',
-    __userId: 'test-user',
-    __quarterlyGoalId: 'qg1',
-    __hashtagId: 'ht1',
-    text: 'Finish Google Cover Letter',
-    completed: false,
-    order: 1,
+  myTestGoal: WeeklyGoalData = {
+    __id: 'wg1',
+    __userId: 'test-user',
+    __quarterlyGoalId: 'qg1',
+    __hashtagId: 'ht1',
+    text: 'Finish Google Cover Letter',
+    completed: false,
+    order: 1,
     _createdAt: Timestamp.now(),
     _updatedAt: Timestamp.now(),
-    _deleted: false,
-    hashtag: {
-      __id: 'ht1',
+    _deleted: false,
+    hashtag: {
+      __id: 'ht1',
       __userId: 'test-user',
-      name: 'apply-internships',
-      color: '#EE8B72',
+      name: 'apply-internships',
+      color: '#EE8B72',
       _createdAt: Timestamp.now(),
       _updatedAt: Timestamp.now(),
-      _deleted: false,
-    },
+      _deleted: false,
+    },
   };
 
   // --------------- EVENT HANDLING ----------------------
@@ -96,7 +96,7 @@ export class WeeklyGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }
