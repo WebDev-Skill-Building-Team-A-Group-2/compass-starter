@@ -19,7 +19,7 @@ import { WeeklyGoalData } from '../../home.model';
   standalone: true,
   imports: [
     MatCheckbox,
-    NgStyle
+    NgStyle,
   ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
@@ -29,7 +29,7 @@ export class WeeklyGoalsItemComponent implements OnInit {
   /** The current signed in user. */
   goal = input.required<WeeklyGoalData>();
   checked = output<WeeklyGoalData>();
-  
+
   currentUser: Signal<User> = this.authStore.user;
 
 
@@ -41,13 +41,13 @@ export class WeeklyGoalsItemComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  
-  checkGoal(): void{
+
+  checkGoal(): void {
     const g = this.goal();
     g.completed = !g.completed;
     this.checked.emit(g);
-   }
-    
+  }
+
   // --------------- OTHER -------------------------------
 
   constructor(
@@ -56,7 +56,7 @@ export class WeeklyGoalsItemComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

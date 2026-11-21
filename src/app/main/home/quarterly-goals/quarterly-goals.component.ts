@@ -81,8 +81,8 @@ export class QuarterlyGoalsComponent implements OnInit {
     },
   ];
 
-private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
-  
+  private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
+
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
@@ -110,7 +110,7 @@ private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
       },
     });
   }
-  
+
   onGoalToggled(goal: QuarterlyGoalData) {
     goal.completed = !goal.completed;
     this._snackBar.open(
@@ -120,7 +120,7 @@ private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center',
-      }
+      },
     );
   }
 
@@ -132,7 +132,7 @@ private dialogRef!: MatDialogRef<QuarterlyGoalsModalComponent>;
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

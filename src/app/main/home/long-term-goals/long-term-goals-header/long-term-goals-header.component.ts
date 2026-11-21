@@ -34,7 +34,7 @@ export class LongTermGoalsHeaderComponent implements OnInit {
   * emits editClicked output to parent component
   * to display snackbar
   */
-  editGoals(){
+  editGoals() {
     this.editClicked.emit(true);
   }
   // --------------- OTHER -------------------------------
@@ -45,7 +45,7 @@ export class LongTermGoalsHeaderComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

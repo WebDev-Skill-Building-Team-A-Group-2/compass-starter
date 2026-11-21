@@ -16,7 +16,7 @@ import { interval, map } from 'rxjs';
   imports: [
   ],
 })
-export class GreetingComponent{
+export class GreetingComponent {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
@@ -26,27 +26,27 @@ export class GreetingComponent{
   // --------------- LOCAL UI STATE ----------------------
 
   // --------------- COMPUTED DATA -----------------------
-  
-  //update date every 1000 ms
-  
+
+  // update date every 1000 ms
+
   time: Signal<Date> = toSignal(
     interval(1000).pipe(
-      map(() => new Date())
+      map(() => new Date()),
     ),
-    { initialValue: new Date() }
+    { initialValue: new Date() },
   );
-  
-/**
+
+  /**
   *change date to hours -> if hours is between 5 and 12 say good morning,
   *if hours between 12 and 18 say good afternoon
   *if hours between 18 and 5 say good evening
   */
-  
+
   greeting: Signal<string> = computed(() => {
     const currentHour = this.time().getHours();
-  
+
     let greetingMessage: string;
-  
+
     if (currentHour >= 5 && currentHour < 12) {
       greetingMessage = 'Good morning';
     } else if (currentHour < 18) {
@@ -54,7 +54,7 @@ export class GreetingComponent{
     } else {
       greetingMessage = 'Good evening';
     }
-  
+
     return greetingMessage;
   });
 
@@ -68,6 +68,4 @@ export class GreetingComponent{
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
-
 }

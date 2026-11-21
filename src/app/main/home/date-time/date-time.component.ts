@@ -31,9 +31,9 @@ export class DateTimeComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
   time: Signal<Date> = toSignal(
     interval(1000).pipe(
-      map(() => new Date())
+      map(() => new Date()),
     ),
-    { initialValue: new Date() }
+    { initialValue: new Date() },
   );
 
   dateSuffix: Signal<string> = computed(() => {
@@ -56,7 +56,7 @@ export class DateTimeComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

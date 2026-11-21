@@ -51,7 +51,7 @@ export class QuarterlyGoalsModalComponent implements OnInit {
 
   get addedGoalsCount() {
     return this.allGoals.controls.filter(
-      (goal) => goal.value._new && !goal.value._deleted
+      (goal) => goal.value._new && !goal.value._deleted,
     ).length;
   }
 
@@ -61,7 +61,7 @@ export class QuarterlyGoalsModalComponent implements OnInit {
         goal.dirty &&
         goal.value.text !== goal.value.originalText &&
         !goal.value._new &&
-        !goal.value._deleted
+        !goal.value._deleted,
     ).length;
   }
 
@@ -72,11 +72,11 @@ export class QuarterlyGoalsModalComponent implements OnInit {
   // --------------- EVENT HANDLING ----------------------
 
   drop(event: CdkDragDrop<string[]>) {
-  const control = this.allGoals.at(event.previousIndex);
-  this.allGoals.removeAt(event.previousIndex);
-  this.allGoals.insert(event.currentIndex, control);
-  this.allGoals.markAsDirty();
-}
+    const control = this.allGoals.at(event.previousIndex);
+    this.allGoals.removeAt(event.previousIndex);
+    this.allGoals.insert(event.currentIndex, control);
+    this.allGoals.markAsDirty();
+  }
   async saveGoals() {
     await this.data.updateQuarterlyGoals(this.allGoals);
   }
@@ -94,7 +94,7 @@ export class QuarterlyGoalsModalComponent implements OnInit {
         __quarterlyGoalId: [goal ? goal.__quarterlyGoalId : ''],
         _deleted: [goal ? goal._deleted : false],
         _new: [goal ? false : true],
-      })
+      }),
     );
   }
 
@@ -104,7 +104,7 @@ export class QuarterlyGoalsModalComponent implements OnInit {
       goalDatas: QuarterlyGoalData[];
       updateQuarterlyGoals: (goals: FormArray) => Promise<void>;
     },
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   // --------------- LOAD AND CLEANUP --------------------
